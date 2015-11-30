@@ -1,25 +1,22 @@
-<?php
-$servername = "cssql.seattleu.edu";
-$username = "griecoa1";
-$password = "Dprtr8LJ";
-$dbname = "cs5021team3";
-
-// create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
+<?php require "connection.php";
 ?>
 
 <html> 
 <head>
-	<title>Milestone 3 (team 3)</title>
+	<title>Confirmation</title>
 </head>
 <body>
 
+
+
+<?php
+$current_user = 'jane';
+$grad_type = "SELECT grad_type_description FROM user, new_application, graduate_type 
+WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND 
+new_application.grad_type_id = graduate_type.grad_type_id";
+
+$grad_type_result = mysqli_query($conn, $grad_type);
+?>
     <form action="Logout.php" method="post">
 
     <?php
@@ -35,7 +32,9 @@ if (!$conn) {
 // $studenttypessqlresult = mysqli_query($conn, $studenttypessql);
 
 ?>
-<p style='margin-left:20px;'> Student Type:
+<p style='margin-left:20px;'> Student Type: 
+
+<?php if (mysqli_num_rows($grad_type_result) > 0) { while($row = mysqli_fetch_row($grad_type_result)) { echo $row[0]; } } ?>
 </p>
 <p style='margin-left:20px;'> College:
 </p>
