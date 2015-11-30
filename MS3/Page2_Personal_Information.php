@@ -1,10 +1,5 @@
 <?php
 	require "connection.php";
-	//check connection
-	if(!$conn)
-	{
-		die("Connection failed: " . mysqli_connect_error());
-	}
 
 	$sqlStateQuery = "SELECT state_id, state_description FROM state";
 	$sqlMilitaryBranchQuery = "SELECT military_id, military_description FROM military_branch";
