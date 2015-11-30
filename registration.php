@@ -30,7 +30,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Please sign up for Bootsnipp <small>It's free!</small></h3>
+                    <h3 class="panel-title">New Applicnts Register Here</h3>
                 </div>
                 <div class="panel-body">
                     <form role="form">
@@ -79,7 +79,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <p>Team 3: M. Weaver, A. Grieco, B. Weekes</p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
