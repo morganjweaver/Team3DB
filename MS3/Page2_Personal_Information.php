@@ -10,8 +10,8 @@
 	$sqlMilitaryBranchQuery = "SELECT military_id, military_description FROM military_branch";
 	$sqlVetStatQuery = "SELECT vet_status_id, vet_status_description FROM veteran_status";
 	$sqlOriginTypeQuery = "SELECT origin_id, origin_description FROM origin_type";
-	$sqlGender = "SELECT gender_id, gender_descrip FROM gender";
-	$sqlMonth = "SELECT month_id, month_descrip FROM month";
+	$sqlGender = "SELECT gender_id, gender_description FROM gender";
+	$sqlMonth = "SELECT month_id, month_description FROM month";
 	$resultState = mysqli_query($conn, $sqlStateQuery);
 	$resultMilitaryBranch = mysqli_query($conn, $sqlMilitaryBranchQuery);
 	$resultVetStat = mysqli_query($conn, $sqlVetStatQuery);
