@@ -4,9 +4,10 @@ session_start();
 
 // for testing purposes only - will remove
 print_r($_POST);
+//print_r($_SESSION);
 
 // check for completion and set Personal_Information variables 
-include "check_variables_Personal_Information";
+include "check_variables_Personal_Information.php";
 	
 // If all information on Personal_Information page is complete, add it to the 
 // DB and display the Application_Information page. Otherwise, send the user 
@@ -35,6 +36,8 @@ if ($personalInfoIsComplete){
 	VALUES(?,?,?)");
 	mysqli_stmt_bind_param($stmt_origin, 'iss', $application_id, $user_id, 
 	$app_origin);
+	$application_id = $_SESSION['application_id'];
+	$user_id = $_SESSION['user_id'];
 	foreach($origin_id as $origin){
 		$app_origin = $origin;
 		mysqli_stmt_execute($stmt_origin);
@@ -54,9 +57,11 @@ function goTo_personalInformation(){
     echo <<<EOF
     <form action="Personal_Information.php" method="post">
 	<p>
-	It appears that the reqired fields above were not completed on the Personal Information page
-	of your application. <br>Please note that all fields must be completed before clicking 
-	the "Submit" button. Please press "Continue" to <br>return to the Personal Information page.
+	It appears that the reqired fields above were not completed on the Personal Information page. <br>
+	Please note that all fields must be completed before clicking the "Submit" button. <br>
+	</p>
+	<p>
+	Press "Continue" to return to the Personal Information page.
 	</p>
 	<p><input type=submit value="Continue"></p>
 EOF;
@@ -74,7 +79,7 @@ EOF;
 
 function display_formAppInfo() {
     echo <<<EOF
-    <form action="Confirmation_Page" method="post">
+    <form action="message_Application_Information.php" method="post">
     <h1>Application Information</h1>
 <p>Will you be applying for financial aid? </p>
 <p style='margin-left:20px;'>
@@ -99,6 +104,13 @@ function display_formAppInfo() {
 <input type="radio" name="felony" value=1> Yes</p>
 <p style='margin-left:20px;'>
 <input type="radio" name="felony" value=0> No</p>
+
+<p>Have you ever been placed on probation, suspended from, dismissed from 
+or <br>otherwise sanctioned by (for a period of time) any higher education institution?</p>
+<p style='margin-left:20px;'>
+<input type="radio" name="sanctioned" value=1> Yes</p>
+<p style='margin-left:20px;'>
+<input type="radio" name="sanctioned" value=0> No</p>
 
 <p>
 <input type="submit" value="Submit" />
