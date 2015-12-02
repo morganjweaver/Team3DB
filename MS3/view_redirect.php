@@ -28,12 +28,12 @@ while(mysqli_stmt_fetch($stmt_NewApp)){
 }
 
 // testing
-echo "<p>Application id is ".$application;
+//echo "<p>Application id is ".$application;
 
 mysqli_stmt_close($stmt_NewApp);
 
 // testing
-echo "<p>Count for New_Application is ".$countNewApp;
+//echo "<p>Count for New_Application is ".$countNewApp;
 
 // if the user has created an application, find the state of completion
 if($countNewApp > 0){
@@ -50,6 +50,10 @@ if($countNewApp > 0){
 	//testing
 	//echo "<p>Application id is ".$app;
 	
+	//echo "<p>Student name is ".$name;
+
+	
+	
 	
 	$countPerInf = 0;
 	while(mysqli_stmt_fetch($stmt_PerInf)){
@@ -57,6 +61,7 @@ if($countNewApp > 0){
 	}
 	
 	// testing
+	//echo "<p>Student name is ".$name;
 	//echo "<p>Count for Personal_Informaiton is".$countPerInf;
 	
 	mysqli_stmt_close($stmt_PerInf);
@@ -98,53 +103,51 @@ if($countNewApp > 0){
 
 
 function goTo_Confirmation(){
-	// echo "<p>Sent to Confirmation page...";
-	echo <<<EOF
-    <form action="Confirmation.php" method="post">
-<p> 
-Our records show that you already have an application on file. 
-</p>
-<p>
-Click "Continue" to review your completed application.
-</p>
-<p><input type="submit" value="Continue"></p>
-EOF;
+	header("Location: Confirmation.php");
+    exit();
 }
 
 function goTo_applicationInfo(){
-	// echo "<p>Sent to Application_Information page...";
 	echo <<<EOF
     <form action="Application_Information.php" method="post">
 <p>
-Our records show that you already have an application in progress. 
+Our records show that your application is incomplete. 
 </p>
 <p>
-Click "Continue" to return to the Application Information page to complete your application.
+Please click "Continue" to return to the Application Information page to complete your application.<br>
+Once your application is complete, you will be able to review your submission.
 </p>
 <p><input type="submit" value="Continue"></p>
 EOF;
 }
 
 function goTo_personalInfo(){
-	// echo "<p>Sent to Personal_Information page...";
 	echo <<<EOF
     <form action="Personal_Information.php" method="post">
 <p>
-Our records show that you already have an application in progress. 
+Our records show that your application is incomplete. 
 </p>
 <p>
-Click "Continue" to return to the Personal Information page to complete your application.
+Please click "Continue" to return to the Personal Information page to complete your application.<br>
+Once your application is complete, you will be able to review your submission.
 </p>
 <p><input type="submit" value="Continue"></p>
 EOF;
 }
 
 function goTo_newApplication(){
-	//echo "<p>Sent to New_Application page...";
-	header("Location: New_Application.php");
-    exit();
+	echo <<<EOF
+    <form action="New_Application.php" method="post">
+<p>
+Our records show that you have not yet created an application. 
+</p>
+<p>
+Please click "Continue" to begin a new application.<br>
+Once your application is complete, you will be able to review your submission.
+</p>
+<p><input type="submit" value="Continue"></p>
+EOF;
 }
-
 
 mysqli_close($conn);
 session_unset();
