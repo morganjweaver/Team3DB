@@ -1,10 +1,16 @@
 <?php
 require "connection.php";
+
+//echo mysqli_connect_error();
+
 session_start();
+
+// temporary for texting
+$_SESSION['application_id'] = 1000001;
 
 // for testing purposes only - will remove
 print_r($_POST);
-//print_r($_SESSION);
+print_r($_SESSION);
 
 // check for completion and set Personal_Information variables 
 include "check_variables_Personal_Information.php";
@@ -16,28 +22,46 @@ if ($personalInfoIsComplete){
 	
 	// prepared statement to insert personal_information into DB
 	$stmt_personal_info = mysqli_prepare($conn, "INSERT INTO personal_information
-	(user_id, student_fname, student_lname, student_initial, sudent_prefname,
-	student_dob, student_street_address, student_uint_num, student_city,
-	student_zip, state_id, student_prefphone, student_citizen, student_english_lang,
-	gender_id, vet_status_id, military_id, hisplat)VALUES(?,?,?,?,?,?,?,?,?,?,
-	?,?,?,?,?,?,?,?)");
-	mysqli_stmt_bind_param($stmt_personal_info, 'ssssssssssssiisssi', 
-	$user_id, $student_fname, $student_lname, $student_initial, 
-	$sudent_prefname, $student_dob, $student_street_address, $student_uint_num, 
-	$student_city, $student_zip, $state_id, $student_prefphone, 
-	$student_citizen, $student_english_lang, $gender_id, $vet_status_id, 
-	$military_id, $hisplat);
-	$user_id = $_SESSION['user_id'];
+	(application_id, student_fname, student_lname, student_initial, student_prefname, 
+	student_dob, student_street_address, student_unit_num, student_city, student_zip, 
+	state_id, student_prefphone, student_citizen, student_english_lang, gender_id, 
+	vet_status_id, military_id, hisplat)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+	
+	// check connection status
+	if($stmt_personal_info==FALSE){die("Connecton failed:".mysqli_connect_error());}
+	
+	mysqli_stmt_bind_param($stmt_personal_info, 'isssssssssssiisssi', $app, $fname, 
+	$lname, $initial, $prefname, $dob, $street_address, $unit_num, $city, $zip, $state,	
+	$prefphone, $citizen, $english_lang, $gender, $vet_status, $military, $hisp);
+	
+	$app = $_SESSION['application_id'];
+	$fname = $student_fname;
+	$lname = $student_lname;
+	$initial = $student_initial;
+	$prefname = $student_prefname;
+	$dob = $student_dob;
+	$street_address = $student_street_address;
+	$unit_num = $student_unit_num;
+	$city = $student_city;
+	$zip = $student_zip;
+	$state = $state_id;
+	$prefphone = $student_prefphone;
+	$citizen = $student_citizen;
+	$english_lang = $student_english_lang;
+	$gender = $gender_id;
+	$vet_status = $vet_status_id;
+	$military = $military_id;
+	$hisp = $hisplat;	
+	
 	mysqli_stmt_execute($stmt_personal_info);
 	mysqli_stmt_close($stmt_personal_info);
 	
 	// prepared statement to insert applicant_origin into the DB
 	$stmt_origin = mysqli_prepare($conn, "INSERT INTO applicant_origin 
-	VALUES(?,?,?)");
-	mysqli_stmt_bind_param($stmt_origin, 'iss', $application_id, $user_id, 
+	VALUES(?,?)");
+	mysqli_stmt_bind_param($stmt_origin, 'is', $application_id, 
 	$app_origin);
 	$application_id = $_SESSION['application_id'];
-	$user_id = $_SESSION['user_id'];
 	foreach($origin_id as $origin){
 		$app_origin = $origin;
 		mysqli_stmt_execute($stmt_origin);
