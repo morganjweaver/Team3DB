@@ -6,7 +6,7 @@ $personalInfoIsComplete = True;
 if (strlen($_POST['student_fname']) > 0) {
 	$student_fname = $_POST['student_fname'];
 } else {
-	echo "<p> <font color='red'>* First Name not entered. </font> <p>";
+	echo "<p> <font color='red'>* First name not entered. </font> <p>";
 	$personalInfoIsComplete = False;
 }
 
@@ -19,7 +19,7 @@ if(strlen($_POST['student_initial']) > 0){
 if (strlen($_POST['student_lname']) > 0) {
 	$student_lname = $_POST['student_lname'];
 } else {
-	echo "<p> <font color='red'>* Last Name not entered. </font> <p>";
+	echo "<p> <font color='red'>* Last name not entered. </font> <p>";
 	$personalInfoIsComplete = False;
 }
 
@@ -30,9 +30,9 @@ if(strlen($_POST['student_prefname']) > 0){
 }
 
 if (strlen($_POST['student_street_addr']) > 0) {
-	$student_street_addr = $_POST['student_street_addr'];
+	$student_street_address = $_POST['student_street_addr'];
 } else {
-	echo "<p> <font color='red'>* Street Address not included in Mailing Address.
+	echo "<p> <font color='red'>* Street address not included in mailing address.
 	</font> <p>";
 	$personalInfoIsComplete = False;
 }
@@ -46,14 +46,14 @@ if(strlen($_POST['student_unit_num']) > 0){
 if (strlen($_POST['student_city']) > 0) {
 	$student_city = $_POST['student_city'];
 } else {
-	echo "<p> <font color='red'>* City not included in Mailing Address. </font> <p>";
+	echo "<p> <font color='red'>* City not included in mailing address. </font> <p>";
 	$personalInfoIsComplete = False;
 }
 
 if (strlen($_POST['student_zip']) > 0) {
 	$student_zip = $_POST['student_zip'];
 } else {
-	echo "<p> <font color='red'>* Zip Code not included in Mailing Address. 
+	echo "<p> <font color='red'>* Zip code not included in mailing address. 
 	</font> <p>";
 	$personalInfoIsComplete = False;
 }
@@ -70,14 +70,14 @@ if (strlen($_POST['prefphoneA']) == 3 &&
 if (isset($_POST['student_citizen'])) {
 	$student_citizen = $_POST['student_citizen'];
 } else {
-	echo "<p> <font color='red'>* US Citizenship status not selected. </font> <p>";
+	echo "<p> <font color='red'>* US citizenship status not selected. </font> <p>";
 	$personalInfoIsComplete = False;
 }
 
 if (isset($_POST['student_english_lang'])) {
 	$student_english_lang = $_POST['student_english_lang'];
 } else {
-	echo "<p> <font color='red'>* English as Native Language status not selected. 
+	echo "<p> <font color='red'>* English as native language status not selected. 
 	</font> <p>";
 	$personalInfoIsComplete = False;
 }
