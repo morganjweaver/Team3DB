@@ -28,12 +28,12 @@ while(mysqli_stmt_fetch($stmt_NewApp)){
 }
 
 // testing
-//echo "<p>Application id is ".$application;
+echo "<p>Application id is ".$application;
 
 mysqli_stmt_close($stmt_NewApp);
 
 // testing
-//echo "<p>Count for New_Application is ".$countNewApp;
+echo "<p>Count for New_Application is ".$countNewApp;
 
 // if the user has created an application, find the state of completion
 if($countNewApp > 0){
@@ -50,10 +50,6 @@ if($countNewApp > 0){
 	//testing
 	//echo "<p>Application id is ".$app;
 	
-	//echo "<p>Student name is ".$name;
-
-	
-	
 	
 	$countPerInf = 0;
 	while(mysqli_stmt_fetch($stmt_PerInf)){
@@ -61,7 +57,6 @@ if($countNewApp > 0){
 	}
 	
 	// testing
-	//echo "<p>Student name is ".$name;
 	//echo "<p>Count for Personal_Informaiton is".$countPerInf;
 	
 	mysqli_stmt_close($stmt_PerInf);
@@ -103,6 +98,7 @@ if($countNewApp > 0){
 
 
 function goTo_Confirmation(){
+	// echo "<p>Sent to Confirmation page...";
 	echo <<<EOF
     <form action="Confirmation.php" method="post">
 <p> 
@@ -111,12 +107,12 @@ Our records show that you already have an application on file.
 <p>
 Click "Continue" to review your completed application.
 </p>
-<p><input type=submit value="Continue"></p>
+<p><input type="submit" value="Continue"></p>
 EOF;
 }
 
 function goTo_applicationInfo(){
-	echo "<p>Sent to Application_Information page...";
+	// echo "<p>Sent to Application_Information page...";
 	echo <<<EOF
     <form action="Application_Information.php" method="post">
 <p>
@@ -125,21 +121,21 @@ Our records show that you already have an application in progress.
 <p>
 Click "Continue" to return to the Application Information page to complete your application.
 </p>
-<p><input type=submit value="Continue"></p>
+<p><input type="submit" value="Continue"></p>
 EOF;
 }
 
 function goTo_personalInfo(){
 	// echo "<p>Sent to Personal_Information page...";
 	echo <<<EOF
-    <form action="Personal_Informaiton.php" method="post">
+    <form action="Personal_Information.php" method="post">
 <p>
 Our records show that you already have an application in progress. 
 </p>
 <p>
 Click "Continue" to return to the Personal Information page to complete your application.
 </p>
-<p><input type=submit value="Continue"></p>
+<p><input type="submit" value="Continue"></p>
 EOF;
 }
 
