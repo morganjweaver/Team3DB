@@ -10,9 +10,9 @@
 
 
 <?php
-$current_user = 'jane';
-$current_user_id = 100;
-$current_app_id = 1;
+$current_user = '100'; //POST VAR
+$current_app_id = "SELECT application_information.application_ID from application_information
+WHERE application_information.application_ID = $current_user";
 
 //New_Application table vars start here-----------------
 $grad_type = "SELECT grad_type_description FROM user, new_application, graduate_type 
@@ -48,95 +48,95 @@ $term_year_result = mysqli_query($conn, $term_year);
 //Personal_Information table vars start here-----------------
 
 $name = "SELECT student_fname, student_initial, student_lname FROM personal_information 
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $name_result = mysqli_query($conn, $name);
 
 $preferred_name = "SELECT student_prefname FROM personal_information
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $preferred_name_result = mysqli_query($conn, $preferred_name);
 
 $dob = "SELECT student_dob FROM personal_information
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $dob_result = mysqli_query($conn, $dob);
 
 $address = "SELECT student_street_address, student_unit_num, student_city, state_id, student_zip FROM personal_information
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $address_result = mysqli_query($conn, $address);
 
 $citizen = "SELECT student_citizen FROM personal_information
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $citizen_result = mysqli_query($conn, $citizen);
 
 $native_english = "SELECT student_english_lang FROM personal_information
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $native_english_result = mysqli_query($conn, $native_english);
 
 $gender = "SELECT gender.gender_description FROM personal_information, gender
-WHERE personal_information.User_ID = $current_user_id AND 
+WHERE personal_information.User_ID = $current_user AND 
 personal_information.gender_id = gender.gender_id";
 $gender_result = mysqli_query($conn, $gender);
 
 $veteran_status = "SELECT veteran_status.vet_status_description FROM personal_information, veteran_status
-WHERE personal_information.User_ID = $current_user_id AND 
+WHERE personal_information.User_ID = $current_user AND 
 personal_information.vet_status_id = veteran_status.vet_status_id";
 $veteran_status_result = mysqli_query($conn, $veteran_status);
 
 $branch = "SELECT military_branch.military_description FROM personal_information, military_branch
-WHERE personal_information.User_ID = $current_user_id AND 
+WHERE personal_information.User_ID = $current_user AND 
 personal_information.military_ID = military_branch.military_ID";
 $branch_result = mysqli_query($conn, $branch);
 
 $hispanic = "SELECT hisplat FROM personal_information
-WHERE personal_information.User_ID = $current_user_id";
+WHERE personal_information.User_ID = $current_user";
 $hispanic_result = mysqli_query($conn, $hispanic);
 
 //Other variables not neatly grouped into a single table follow:
 
 $ethnicity = "SELECT origin_type.origin_description FROM 
 personal_information, applicant_origin, origin_type
-WHERE personal_information.User_ID = $current_user_id 
-AND applicant_origin.User_ID = $current_user_id 
+WHERE personal_information.User_ID = $current_user 
+AND applicant_origin.User_ID = $current_user 
 AND personal_information.application_ID = applicant_origin.application_ID 
 AND applicant_origin.origin_ID = origin_type.origin_ID";
 $ethnicity_result = mysqli_query($conn, $ethnicity);
 
 $finaid = "SELECT app_financial_aid FROM application_information
-WHERE application_information.User_ID = $current_user_id";
+WHERE application_information.User_ID = $current_user";
 $finaid_result = mysqli_query($conn, $finaid);
 
 $emp_asst = "SELECT app_employer_tuition FROM application_information
-WHERE application_information.User_ID = $current_user_id";
+WHERE application_information.User_ID = $current_user";
 $emp_asst_result = mysqli_query($conn, $emp_asst);
 
 $other_progs = "SELECT app_other_program_apps FROM application_information
-WHERE application_information.User_ID = $current_user_id";
+WHERE application_information.User_ID = $current_user";
 $other_progs_result = mysqli_query($conn, $other_progs);
 
 $felony = "SELECT app_felony FROM application_information
-WHERE application_information.User_ID = $current_user_id";
+WHERE application_information.User_ID = $current_user";
 $felony_result = mysqli_query($conn, $felony);
 
 $sanctioned = "SELECT app_sanctioned FROM application_information
-WHERE application_information.User_ID = $current_user_id";
+WHERE application_information.User_ID = $current_user";
 $sanctioned_result = mysqli_query($conn, $sanctioned);
 
 $ed_hist = "SELECT ed_institution, ed_start, ed_finish, 
 ed_degree_recd_date, ed_major, degree_earned_id, state_id 
 FROM ed_history
 WHERE ed_history.application_ID = $current_app_id
-AND ed_history.User_ID = $current_user_id";
+AND ed_history.User_ID = $current_user";
 $ed_hist_result = mysqli_query($conn, $ed_hist);
 
 $employment = "SELECT emp_name, emp_occupation, emp_startdate, 
 emp_enddate, fptime_id, emp_current, emp_street_addr, emp_unit_num,
 emp_city, emp_zip, emp_phone, state_id FROM employer 
-WHERE employer.User_ID = $current_user_id AND employer.application_ID = $current_app_id";
+WHERE employer.User_ID = $current_user AND employer.application_ID = $current_app_id";
 $employment_result = mysqli_query($conn, $employment);
 
 $test = "SELECT entrance_test.test_description, applicant_test.month_id, 
 applicant_test.test_year FROM entrance_test, applicant_test WHERE
 entrance_test.test_ID = applicant_test.test_ID AND 
-applicant_test.User_ID = $current_user_id AND 
+applicant_test.User_ID = $current_user AND 
 applicant_test.application_ID = $current_app_id";
 $test_result = mysqli_query($conn, $test);
 ?>

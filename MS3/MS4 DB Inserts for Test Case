@@ -1,0 +1,12 @@
+ insert into new_application values(1,'GR','ScEng','CERT','CSAD','Su','16');
+ insert into user values(100,'jane','secret');
+insert into new_application values(1,'GR','ScEng','CERT','CSAD','Su','16');
+ insert into personal_information values(1,100,'Jane','de Wol','X','Janice',12/01/2015,'123 Poplar Place','','Greenwich','33243','AZ','1234567890',1,1,'F','NV','AR','0');
+ insert into applicant_origin values(1,'ASIA');
+insert into applicant_origin values(1,'BLAA');
+insert into application_information values(1,1,1,1,2,2);
+insert into ed_history values(1,1,'Brandt University',2006-06-05,2010-05-05,2010-05-12,'Omphaloskepsis','B','OR');
+insert into employer values(001,1,100,"Driscoll's Ambihelical Hexnuts LLC",'Ambihelical Engineering Specialist','2014-10-10','2015-01-22','F',2,'666 Hexnut Blvd','unit 0','Doverville','98098','6666666666','CO');
+insert into employer values(002,1,100,"Riddick's Ambihelical Dogbaths LLC",'Dogwashing Specialist','2010-02-22','2013-01-22','F',2,'123 SPaniel Blvd','n/a','Doverville','98098','4444444446','CO');
+insert into applicant_test values(1,1,2011,'01');
+ insert into applicant_test values(1,3,2015,'03');
