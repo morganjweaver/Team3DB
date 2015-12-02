@@ -28,12 +28,12 @@ while(mysqli_stmt_fetch($stmt_NewApp)){
 }
 
 // testing
-echo "<p>Application id is ".$application;
+//echo "<p>Application id is ".$application;
 
 mysqli_stmt_close($stmt_NewApp);
 
 // testing
-echo "<p>Count for New_Application is ".$countNewApp;
+//echo "<p>Count for New_Application is ".$countNewApp;
 
 // if the user has created an application, find the state of completion
 if($countNewApp > 0){
