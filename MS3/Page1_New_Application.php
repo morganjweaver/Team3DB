@@ -45,12 +45,12 @@ $yearresult = mysqli_query($conn, $yearsql);
 
 <form action= "Page2_Personal_Information.php" method= "POST">
 <!--<ol>-->
-<p style='margin-left:20px;'> What type of Student are you?
+<p style='margin-left:20px;'> What type of student are you?
 
 <?php 
 
 if (mysqli_num_rows($studenttypessqlresult) > 0) {
-    echo "<select>";
+    echo "<select name='grad_type_id'>";
     while($row = mysqli_fetch_row($studenttypessqlresult)) {
         echo "<option value='" . $row[0]."'>" . $row[1] . "</option>";
     }
@@ -67,7 +67,7 @@ if (mysqli_num_rows($studenttypessqlresult) > 0) {
  <?php 
 
 if (mysqli_num_rows($collegetypessqlresult) > 0) {
-    echo "<select>";
+    echo "<select name='college_id'>";
     while($row = mysqli_fetch_row($collegetypessqlresult)) {
         echo "<option value='" . $row[0]."'>" . $row[1] . "</option>";
     }
@@ -81,7 +81,7 @@ if (mysqli_num_rows($collegetypessqlresult) > 0) {
 <?php 
 
 if (mysqli_num_rows($degreetypesqlresult) > 0) {
-    echo "<select>";
+    echo "<select name='degree_id'>";
     while($row = mysqli_fetch_row($degreetypesqlresult)) {
         echo "<option value='" . $row[0]."'>" . $row[1] . "</option>";
     }
@@ -96,7 +96,7 @@ if (mysqli_num_rows($degreetypesqlresult) > 0) {
 <?php 
 
 if (mysqli_num_rows($desiredmajorresult) > 0) {
-    echo "<select>";
+    echo "<select name='desired_major_id'>";
     while($row = mysqli_fetch_row($desiredmajorresult)) {
         echo "<option value='" . $row[0]."'>" . $row[1] . "</option>";
     }
@@ -111,7 +111,7 @@ if (mysqli_num_rows($desiredmajorresult) > 0) {
 <?php 
 
 if (mysqli_num_rows($seasonresult) > 0) {
-    echo "<select>";
+    echo "<select name='term_season_id'>";
     while($row = mysqli_fetch_row($seasonresult)) {
         echo "<option value='" . $row[0]."'>" . $row[1] . "</option>";
     }
@@ -125,7 +125,7 @@ if (mysqli_num_rows($seasonresult) > 0) {
 <?php 
 
 if (mysqli_num_rows($yearresult) > 0) {
-    echo "<select>";
+    echo "<select name='term_year_id'>";
     while($row = mysqli_fetch_row($yearresult)) {
         echo "<option value='" . $row[0]."'>" . $row[1] . "</option>";
     }
