@@ -217,7 +217,7 @@
 
 	<p>
 		<label for="MilBranch">
-			Military Branch:
+			Military Branch (if applicable):
 		</label>
 		<?php
 			if (mysqli_num_rows($resultMilitaryBranch) > 0) 
