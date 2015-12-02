@@ -40,12 +40,12 @@ if($countNewApp > 0){
 	// get the applcation_id
 	$_SESSION['application_id'] = $application;
 	// check to see if Personal_Information was completed
-	$stmt_PerInf = mysqli_prepare($conn, "SELECT user_id FROM 
+	$stmt_PerInf = mysqli_prepare($conn, "SELECT student_fname FROM 
 	personal_information WHERE application_id = ?");
 	mysqli_stmt_bind_param($stmt_PerInf, "i", $app);
 	$app = $_SESSION['application_id'];
 	mysqli_stmt_execute($stmt_PerInf);
-	mysqli_stmt_bind_result($stmt_PerInf, $u_id);
+	mysqli_stmt_bind_result($stmt_PerInf, $result_perInf);
 	
 	//testing
 	//echo "<p>Application id is ".$app;
@@ -67,7 +67,7 @@ if($countNewApp > 0){
 	// if Personal_Informaiton page completed, check next page
 	if($countPerInf > 0){
 		// check to see if Application_Information was completed
-		$stmt_AppInf = mysqli_prepare($conn, "SELECT user_id FROM 
+		$stmt_AppInf = mysqli_prepare($conn, "SELECT app_felony FROM 
 		application_information	WHERE application_id = ?");
 		mysqli_stmt_bind_param($stmt_AppInf, "i", $application);
 		$application = $_SESSION["application_id"];
