@@ -1,3 +1,5 @@
+TEST!
+
 CREATE TABLE entrance_test (
 test_id INT NOT NULL AUTO_INCREMENT UNIQUE,
 test_description VARCHAR(20) NOT NULL,
