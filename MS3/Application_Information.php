@@ -6,7 +6,7 @@ require "connection.php";
 session_start();
 
 // temporary for texting
-$_SESSION['application_id'] = 1000004;
+//$_SESSION['application_id'] = 1000004;
 
 // for testing purposes only - will remove
 print_r($_POST);
