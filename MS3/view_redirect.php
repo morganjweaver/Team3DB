@@ -2,10 +2,9 @@
 require "connection.php";
 session_start();
 
-// if this doesn't automatically post to the application page, we should
-// just make user_id a session variable for sanity's sake
-$_POST['user_id'] = "100";
-$_SESSION['application_id'] = NULL;
+// appears these will not need to be set here
+//$_SESSION['user_id'] = $_POST['user_id];
+//$_SESSION['application_id'] = NULL;
 
 // for testing purposes only
 //print_r($_POST);

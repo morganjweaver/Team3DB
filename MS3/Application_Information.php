@@ -6,7 +6,7 @@ require "connection.php";
 session_start();
 
 // temporary for texting
-$_SESSION['application_id'] = 1000001;
+//$_SESSION['application_id'] = 1000004;
 
 // for testing purposes only - will remove
 print_r($_POST);
@@ -59,11 +59,12 @@ if ($personalInfoIsComplete){
 	// prepared statement to insert applicant_origin into the DB
 	$stmt_origin = mysqli_prepare($conn, "INSERT INTO applicant_origin 
 	VALUES(?,?)");
-	mysqli_stmt_bind_param($stmt_origin, 'is', $application_id, 
-	$app_origin);
-	$application_id = $_SESSION['application_id'];
+	mysqli_stmt_bind_param($stmt_origin, 'is', $app, 
+	$orig);
+	$app = $_SESSION['application_id'];
 	foreach($origin_id as $origin){
-		$app_origin = $origin;
+		$orig = $origin;
+		//echo "<br>Testing the values used for execute: ".$orig." and ".$app;
 		mysqli_stmt_execute($stmt_origin);
 	}
 	mysqli_stmt_close($stmt_origin);

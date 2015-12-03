@@ -282,7 +282,8 @@
 			{
 				while($row = mysqli_fetch_row($resultOriginType)) 
 				{
-					echo "<p style='margin-left:20px;'><input type='checkbox' name='origin_id[]'" . $row[0] . "'>" . $row[1] . "</input></p>\n";
+					echo "<p style='margin-left:20px;'><input type='checkbox' name='origin_id[]'
+					id='origin_id' value='" . $row[0] . "'>" . $row[1] . "</input></p>\n";
 				}
 			} 
 			else 
