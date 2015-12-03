@@ -17,14 +17,13 @@ print_r($_POST);
 // check for completion and set Application_Information variables
 include "check_variables_Application_Information.php";
 
-if ($applicationInfoIsComplete && 
-   ($_POST['felony'] == 1)) {
-    display_message();
+if ($applicationInfoIsComplete) {
 	// include prepared statement for Application_Information here
-} elseif ($applicationInfoIsComplete && 
-   ($_POST['felony'] == 0)) {
-    goTo_confirmation();
-	// include prepared statement for Application_Information here
+	if($_POST['felony'] == 1)) {
+		display_message();
+	} else {
+		goTo_confirmation();
+	} 
 } else {
     goTo_applicationInformation();
 }
