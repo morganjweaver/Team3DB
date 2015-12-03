@@ -1,10 +1,6 @@
 <?php
 	require "connection.php";
-	//check connection
-	if(!$conn)
-	{
-		die("Connection failed: " . mysqli_connect_error());
-	}
+
 
 	$sqlStateQuery = "SELECT state_id, state_description FROM state";
 	$sqlMilitaryBranchQuery = "SELECT military_id, military_description FROM military_branch";
@@ -18,6 +14,36 @@
 	$resultOriginType = mysqli_query($conn, $sqlOriginTypeQuery);
 	$resultGender = mysqli_query($conn, $sqlGender);
 	$resultMonth = mysqli_query($conn, $sqlMonth);
+
+	//prepared statment to insert new_application into DB
+	$stmt_new_application = mysqli_prepare($conn,"INSERT INTO new_application
+		(user_name,grad_type_id,college_id,degree_id,desired_major_id,term_season_id,term_year_id) 
+		VALUES (?,?,?,?,?,?,?)");
+	
+	// check connection status
+	if($stmt_new_application==FALSE){die("Connecton failed:".mysqli_connect_error());}
+	
+	//*****NOTE***** deciding to use user_name NOT user_id (if decide to keep id, also update $sqlAppID query string below)
+	mysqli_stmt_bind_param($stmt_new_application, "sssssss",  
+		$_SESSION['user_name'],
+		$_POST['grad_type_id'], 
+		$_POST['college_id'], 
+		$_POST['degree_id'], 
+		$_POST['desired_major_id'],
+		$_POST['term_season_id'], 
+		$_POST['term_year_id'] 
+		); 
+
+	//execute prepared statement
+	mysqli_stmt_execute($stmt_new_application);
+	//close statement and connection
+	mysqli_stmt_close($stmt_new_application);
+
+	//adding application_id to $_SESSION
+	$sqlAppID = "SELECT application_id FROM new_application WHERE user_name = $_SESSION['user_name'] ORDER BY application_id DESC LIMIT 1";
+	$appID = mysqli_query($conn, $sqlAppID);
+	$row = mysqli_fetch_row($appID);
+	$_SESSION['application_id'] = $row[0];
 
 ?>
 

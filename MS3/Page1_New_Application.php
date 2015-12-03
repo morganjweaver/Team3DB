@@ -43,7 +43,7 @@ $yearresult = mysqli_query($conn, $yearsql);
 <h1>New Application</h1>
 <p>Please answer the following:</p>
 
-<form action= "Page2_Personal_Information.php" method= "POST">
+<form action= "Personal_Information.php" method= "POST">
 <!--<ol>-->
 <p style='margin-left:20px;'> What type of student are you?
 
