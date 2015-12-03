@@ -17,7 +17,7 @@
 
 	//prepared statment to insert new_application into DB
 	$stmt_new_application = mysqli_prepare($conn,"INSERT INTO new_application
-		(user_name,grad_type_id,college_id,degree_id,desired_major_id,term_season_id,term_year_id) 
+		(user_id,grad_type_id,college_id,degree_id,desired_major_id,term_season_id,term_year_id) 
 		VALUES (?,?,?,?,?,?,?)");
 	
 	// check connection status
@@ -25,7 +25,7 @@
 	
 	//*****NOTE***** deciding to use user_name NOT user_id (if decide to keep id, also update $sqlAppID query string below)
 	mysqli_stmt_bind_param($stmt_new_application, "sssssss",  
-		$_SESSION['user_name'],
+		$_SESSION['user_id'],
 		$_POST['grad_type_id'], 
 		$_POST['college_id'], 
 		$_POST['degree_id'], 
@@ -39,8 +39,9 @@
 	//close statement and connection
 	mysqli_stmt_close($stmt_new_application);
 
+
 	//adding application_id to $_SESSION
-	$sqlAppID = "SELECT application_id FROM new_application WHERE user_name = $_SESSION['user_name'] ORDER BY application_id DESC LIMIT 1";
+	$sqlAppID = "SELECT application_id FROM new_application WHERE user_id = $_SESSION['user_id'] ORDER BY application_id DESC LIMIT 1";
 	$appID = mysqli_query($conn, $sqlAppID);
 	$row = mysqli_fetch_row($appID);
 	$_SESSION['application_id'] = $row[0];

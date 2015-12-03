@@ -48,10 +48,13 @@ var_dump($_SESSION);
 
 
 <?php
+
+$current_app_id = $_SESSION['application_id'];
+
 function display_confirmation() {
     echo <<<EOF
     <form action="Logout.php" method="post">
-$current_app_id = $_SESSION['application_id'];
+
 
 //New_Application table vars start here-----------------
 $grad_type = "SELECT grad_type_description FROM new_application, graduate_type 
@@ -304,6 +307,7 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 <p style='margin-left:20px;'>
 EOF;
 }
+?>
 
 <p>
 		<input type="submit" value="Log Out">

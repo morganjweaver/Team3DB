@@ -1,6 +1,15 @@
 <?php require "connection.php";
 ?>
 
+<?php
+session_start();
+
+
+// for testing purposes only - will remove
+print_r($_POST);
+print_r($_SESSION);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,34 +19,18 @@
 <?php 
 
 $studenttypessql = "SELECT grad_type_id, grad_type_description FROM graduate_type";
-
 $studenttypessqlresult = mysqli_query($conn, $studenttypessql);
-
 $collegetypessql = "SELECT college_id, college_description FROM college";
-
 $collegetypessqlresult = mysqli_query($conn, $collegetypessql);
-
 $degreetypesql = "SELECT degree_id, desired_description FROM desired_degree";
-
 $degreetypesqlresult = mysqli_query($conn, $degreetypesql);
-
 $desiredmajorsql = "SELECT desired_major_id, desired_major_description FROM desired_major";
-
 $desiredmajorresult = mysqli_query($conn, $desiredmajorsql);
-
 $seasonsql = "SELECT term_season_id, term_season_description FROM term_season";
-
 $seasonresult = mysqli_query($conn, $seasonsql);
-
 $yearsql = "SELECT term_year_id, term_year_actual FROM term_year";
-
 $yearresult = mysqli_query($conn, $yearsql);
 
-
-//echo $studenttypessqlresult;
-//echo $studenttypessql;
-//echo mysqli_query($conn, "show tables;");
-//grabs table values stores in $studenttypessqlresult 
 ?>
 
 <h1>New Application</h1>
