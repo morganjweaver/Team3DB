@@ -1,6 +1,12 @@
 <?php require "connection.php";
 ?>
 
+// for testing purposes only - will remove
+<?php print_r($_POST); 
+var_dump($_POST);
+?>
+//print_r($_SESSION);
+
 <html> 
 <head>
 	<title>Confirmation</title>
@@ -10,133 +16,131 @@
 
 
 <?php
-$current_user = '100'; //POST VAR
-$current_app_id = "SELECT application_information.application_ID from application_information
-WHERE application_information.application_ID = $current_user";
+$application_ID = 'jane'; 
+$current_app_id =  1; //POST var here 
 
 //New_Application table vars start here-----------------
-$grad_type = "SELECT grad_type_description FROM user, new_application, graduate_type 
-WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND 
+$grad_type = "SELECT grad_type_description FROM new_application, graduate_type 
+WHERE  new_application.application_ID = $current_app_id AND 
 new_application.grad_type_id = graduate_type.grad_type_id";
 $grad_type_result = mysqli_query($conn, $grad_type);
 
-$college = "SELECT college.college_description FROM user, new_application, college 
-WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND 
+$college = "SELECT college.college_description FROM new_application, college 
+WHERE  new_application.application_ID = $current_app_id AND 
 new_application.College_id = college.College_id";
 $college_result = mysqli_query($conn, $college);
 
-$degree_type = "SELECT desired_degree.desired_description FROM user, new_application, desired_degree 
-WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND 
+$degree_type = "SELECT desired_degree.desired_description FROM  new_application, desired_degree 
+WHERE  new_application.application_ID = $current_app_id AND 
 new_application.degree_id = desired_degree.degree_id";
 $degree_type_result = mysqli_query($conn, $degree_type);
 
-$major = "SELECT desired_major.desired_major_description FROM user, new_application, desired_major 
-WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND 
+$major = "SELECT desired_major.desired_major_description FROM  new_application, desired_major 
+WHERE  new_application.application_ID = $current_app_id AND 
 new_application.desired_major_id = desired_major.desired_major_id";
 $major_result = mysqli_query($conn, $major);
 
-$term_season = "SELECT term_season.term_season_description FROM user, new_application, term_season
-WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND 
+$term_season = "SELECT term_season.term_season_description FROM new_application, term_season
+ WHERE new_application.application_ID = $current_app_id AND 
 new_application.term_season_id = term_season.term_season_id";
 $term_season_result = mysqli_query($conn, $term_season);
 
-$term_year = "SELECT term_year.term_year_actual FROM user, new_application, term_year 
-WHERE user.User_Name = '$current_user' AND user.User_ID = new_application.User_ID AND
+$term_year = "SELECT term_year.term_year_actual FROM  new_application, term_year 
+WHERE  new_application.application_ID = $current_app_id AND
  new_application.term_year_id = term_year.term_year_id";
 $term_year_result = mysqli_query($conn, $term_year);
 
 //Personal_Information table vars start here-----------------
 
 $name = "SELECT student_fname, student_initial, student_lname FROM personal_information 
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $name_result = mysqli_query($conn, $name);
 
 $preferred_name = "SELECT student_prefname FROM personal_information
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $preferred_name_result = mysqli_query($conn, $preferred_name);
 
 $dob = "SELECT student_dob FROM personal_information
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $dob_result = mysqli_query($conn, $dob);
 
 $address = "SELECT student_street_address, student_unit_num, student_city, state_id, student_zip FROM personal_information
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $address_result = mysqli_query($conn, $address);
 
 $citizen = "SELECT student_citizen FROM personal_information
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $citizen_result = mysqli_query($conn, $citizen);
 
 $native_english = "SELECT student_english_lang FROM personal_information
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $native_english_result = mysqli_query($conn, $native_english);
 
 $gender = "SELECT gender.gender_description FROM personal_information, gender
-WHERE personal_information.User_ID = $current_user AND 
+WHERE personal_information.application_ID = $current_app_id AND 
 personal_information.gender_id = gender.gender_id";
 $gender_result = mysqli_query($conn, $gender);
 
 $veteran_status = "SELECT veteran_status.vet_status_description FROM personal_information, veteran_status
-WHERE personal_information.User_ID = $current_user AND 
+WHERE personal_information.application_ID = $current_app_id AND 
 personal_information.vet_status_id = veteran_status.vet_status_id";
 $veteran_status_result = mysqli_query($conn, $veteran_status);
 
 $branch = "SELECT military_branch.military_description FROM personal_information, military_branch
-WHERE personal_information.User_ID = $current_user AND 
+WHERE personal_information.application_ID = $current_app_id AND 
 personal_information.military_ID = military_branch.military_ID";
 $branch_result = mysqli_query($conn, $branch);
 
 $hispanic = "SELECT hisplat FROM personal_information
-WHERE personal_information.User_ID = $current_user";
+WHERE personal_information.application_ID = $current_app_id";
 $hispanic_result = mysqli_query($conn, $hispanic);
 
 //Other variables not neatly grouped into a single table follow:
 
 $ethnicity = "SELECT origin_type.origin_description FROM 
 personal_information, applicant_origin, origin_type
-WHERE personal_information.User_ID = $current_user 
-AND applicant_origin.User_ID = $current_user 
+WHERE personal_information.application_ID = $current_app_id 
+AND applicant_origin.application_ID = $current_app_id 
 AND personal_information.application_ID = applicant_origin.application_ID 
 AND applicant_origin.origin_ID = origin_type.origin_ID";
 $ethnicity_result = mysqli_query($conn, $ethnicity);
 
 $finaid = "SELECT app_financial_aid FROM application_information
-WHERE application_information.User_ID = $current_user";
+WHERE application_information.application_ID = $current_app_id";
 $finaid_result = mysqli_query($conn, $finaid);
 
 $emp_asst = "SELECT app_employer_tuition FROM application_information
-WHERE application_information.User_ID = $current_user";
+WHERE application_information.application_ID = $current_app_id";
 $emp_asst_result = mysqli_query($conn, $emp_asst);
 
 $other_progs = "SELECT app_other_program_apps FROM application_information
-WHERE application_information.User_ID = $current_user";
+WHERE application_information.application_ID = $current_app_id";
 $other_progs_result = mysqli_query($conn, $other_progs);
 
 $felony = "SELECT app_felony FROM application_information
-WHERE application_information.User_ID = $current_user";
+WHERE application_information.application_ID = $current_app_id";
 $felony_result = mysqli_query($conn, $felony);
 
 $sanctioned = "SELECT app_sanctioned FROM application_information
-WHERE application_information.User_ID = $current_user";
+WHERE application_information.application_ID = $current_app_id";
 $sanctioned_result = mysqli_query($conn, $sanctioned);
 
 $ed_hist = "SELECT ed_institution, ed_start, ed_finish, 
 ed_degree_recd_date, ed_major, degree_earned_id, state_id 
 FROM ed_history
 WHERE ed_history.application_ID = $current_app_id
-AND ed_history.User_ID = $current_user";
+AND ed_history.application_ID = $current_app_id";
 $ed_hist_result = mysqli_query($conn, $ed_hist);
 
 $employment = "SELECT emp_name, emp_occupation, emp_startdate, 
 emp_enddate, fptime_id, emp_current, emp_street_addr, emp_unit_num,
 emp_city, emp_zip, emp_phone, state_id FROM employer 
-WHERE employer.User_ID = $current_user AND employer.application_ID = $current_app_id";
+WHERE employer.application_ID = $current_app_id AND employer.application_ID = $current_app_id";
 $employment_result = mysqli_query($conn, $employment);
 
 $test = "SELECT entrance_test.test_description, applicant_test.month_id, 
 applicant_test.test_year FROM entrance_test, applicant_test WHERE
 entrance_test.test_ID = applicant_test.test_ID AND 
-applicant_test.User_ID = $current_user AND 
 applicant_test.application_ID = $current_app_id";
 $test_result = mysqli_query($conn, $test);
 ?>
