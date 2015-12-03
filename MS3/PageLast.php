@@ -1,11 +1,43 @@
-<?php require "connection.php";
+<?php 
+require "connection.php";
+// include "check_variables_Application_Information.php";
 ?>
 
-// for testing purposes only - will remove
+<!-- for testing purposes only - will remove -->
 <?php print_r($_POST); 
 var_dump($_POST);
+var_dump($_SESSION);
 ?>
-//print_r($_SESSION);
+
+<!--Prepared statements for Application_Information go here.  Page inserts App_Info into DB after checking for NULLs, then echoes confirmation page.-->
+<?php
+// if ($applicationInfoIsComplete)
+// {
+	$stmt_application_info = mysqli_prepare($conn, "INSERT INTO application_information
+	(application_id, app_financial_aid,app_employer_tuition,app_other_program_apps,
+		app_felony, app_sanctioned) VALUES(?,?,?,?,?,?)");
+	
+	// check connection status
+	if($stmt_application_info==FALSE){die("Error:".mysqli_connect_error());}
+	
+	mysqli_stmt_bind_param($stmt_application_info, 'iiiiii', $app, $fin, $emp_tuition,
+		$other, $fel, $sanct);
+	
+	$app = $_SESSION['application_id'];
+	$fin = $app_financial_aid;
+	$emp_tuition = $app_employer_tuition;
+	$other = $app_other_program_apps;
+	$fel = $app_felony;
+	$sanct = $app_sanctioned;
+	
+	
+	mysqli_stmt_execute($stmt_application_info);
+	mysqli_stmt_close($stmt_application_info);
+
+// } else 
+
+?>
+
 
 <html> 
 <head>
@@ -16,8 +48,10 @@ var_dump($_POST);
 
 
 <?php
-$application_ID = 'jane'; 
-$current_app_id =  1; //POST var here 
+function display_confirmation() {
+    echo <<<EOF
+    <form action="Logout.php" method="post">
+$current_app_id = $_SESSION['application_id'];
 
 //New_Application table vars start here-----------------
 $grad_type = "SELECT grad_type_description FROM new_application, graduate_type 
@@ -143,23 +177,11 @@ applicant_test.test_year FROM entrance_test, applicant_test WHERE
 entrance_test.test_ID = applicant_test.test_ID AND 
 applicant_test.application_ID = $current_app_id";
 $test_result = mysqli_query($conn, $test);
-?>
 
-    <form action="Logout.php" method="post">
 
-    <?php
+    //Print variables below:
 
-// $stmt = $conn->prepare("SELECT * FROM NEW_APPLICATION WHERE User_ID = $User_ID");
-// if ($stmt->execute(array($_GET['name']))) {
-//   while ($row = $stmt->fetch()) {
-//     print_r($row);
-//   }
-// }
-// $studenttypessql = "SELECT grad_type_id, grad_type_description FROM NEW_APPLICATION, 
-// graduate_type WHERE NEW_APPLICATION.User_ID=$User_ID";
-// $studenttypessqlresult = mysqli_query($conn, $studenttypessql);
-
-?>
+  
 <p style='margin-left:20px;'> Student Type: 
 <?php if (mysqli_num_rows($grad_type_result) > 0) 
 { while($row = mysqli_fetch_row($grad_type_result)) { echo $row[0]; } } ?>
@@ -276,9 +298,12 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 <p style='margin-left:20px;'> Entrance Tests: </br>
 <?php if (mysqli_num_rows($test_result) > 0) 
 { while($row = mysqli_fetch_row($test_result)) 
-	{echo $row[0]." ",$row[1]." ",$row[2]." </br>"; } } ?>
+	{echo $row[0]." ",$row[1]." ",$row[2]." </br>"; } } 
+	?>
 
 <p style='margin-left:20px;'>
+EOF;
+}
 
 <p>
 		<input type="submit" value="Log Out">
