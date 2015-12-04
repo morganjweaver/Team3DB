@@ -3,7 +3,7 @@
 
 <?php
 session_start();
-
+$_SESSION['user_id'] = '100';
 
 // for testing purposes only - will remove
 print_r($_POST);

@@ -39,9 +39,9 @@
 	//close statement and connection
 	mysqli_stmt_close($stmt_new_application);
 
-
+	$sessionUserID = $_SESSION['user_id'];
 	//adding application_id to $_SESSION
-	$sqlAppID = "SELECT application_id FROM new_application WHERE user_id = $_SESSION['user_id'] ORDER BY application_id DESC LIMIT 1";
+	$sqlAppID = "SELECT application_id FROM new_application WHERE user_id = '$sessionUserID' ORDER BY application_id DESC LIMIT 1";
 	$appID = mysqli_query($conn, $sqlAppID);
 	$row = mysqli_fetch_row($appID);
 	$_SESSION['application_id'] = $row[0];
