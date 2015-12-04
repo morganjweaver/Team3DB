@@ -2,13 +2,7 @@
 require "connection.php";
 session_start();
 
-// appears these will not need to be set here
-//$_SESSION['user_id'] = $_POST['user_id];
-//$_SESSION['application_id'] = NULL;
-
-// for testing purposes only
-//print_r($_POST);
-//print_r($_SESSION);
+$_SESSION['user_id'] = $_POST['user_id'];
 
 // check if user has created an application in new_application
 $stmt_NewApp = mysqli_prepare($conn, "SELECT application_id FROM 
@@ -18,22 +12,12 @@ $user = $_POST['user_id'];
 mysqli_stmt_execute($stmt_NewApp);
 mysqli_stmt_bind_result($stmt_NewApp, $application);
 
-// works within count statement
-//mysqli_stmt_fetch($stmt_NewApp);
-
-
 $countNewApp = 0;
 while(mysqli_stmt_fetch($stmt_NewApp)){
 	$countNewApp++;
 }
 
-// testing
-//echo "<p>Application id is ".$application;
-
 mysqli_stmt_close($stmt_NewApp);
-
-// testing
-//echo "<p>Count for New_Application is ".$countNewApp;
 
 // if the user has created an application, find the state of completion
 if($countNewApp > 0){
@@ -51,16 +35,9 @@ if($countNewApp > 0){
 	while(mysqli_stmt_fetch($stmt_PerInf)){
 		$countPerInf++;
 	}
-	
-	// testing
-	//echo "<p>Student name is ".$name;
-	//echo "<p>Count for Personal_Informaiton is".$countPerInf;
-	
+
 	mysqli_stmt_close($stmt_PerInf);
 
-	// testing
-	//echo "<p>Count for Personal_Informaiton is ".$countPerInf;
-	
 	// if Personal_Informaiton page completed, check next page
 	if($countPerInf > 0){
 		// check to see if Application_Information was completed
@@ -77,14 +54,14 @@ if($countNewApp > 0){
 		}
 		mysqli_stmt_close($stmt_AppInf);
 
-		// if Application_Information completed, go to PageLast
+		// if Application_Information completed, go to Confirmation page
 		if($countAppInf > 0){
-			goTo_PageLast();			
+			goTo_Confirmation();			
 		// else, if Application_Information not completed, go to Application_Information page			
 		} else {
 			goTo_applicationInfo();
 		}	
-	// else, if Personal_Informaiton not completed, go to the Personal_Informaiton page	
+	// else, if Personal_Informaiton not completed, go to Personal_Informaiton page	
 	} else {
 	goTo_personalInfo();
 	}
@@ -94,8 +71,8 @@ if($countNewApp > 0){
 }
 
 
-function goTo_PageLast(){
-	header("Location: PageLast.php");
+function goTo_Confirmation(){
+	header("Location: Confirmation.php");
     exit();
 }
 
