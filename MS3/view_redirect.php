@@ -77,9 +77,9 @@ if($countNewApp > 0){
 		}
 		mysqli_stmt_close($stmt_AppInf);
 
-		// if Application_Information completed, go to Confirmation page
+		// if Application_Information completed, go to PageLast
 		if($countAppInf > 0){
-			goTo_Confirmation();			
+			goTo_PageLast();			
 		// else, if Application_Information not completed, go to Application_Information page			
 		} else {
 			goTo_applicationInfo();
@@ -94,8 +94,8 @@ if($countNewApp > 0){
 }
 
 
-function goTo_Confirmation(){
-	header("Location: Confirmation.php");
+function goTo_PageLast(){
+	header("Location: PageLast.php");
     exit();
 }
 

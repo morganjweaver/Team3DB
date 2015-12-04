@@ -77,9 +77,9 @@ if($countNewApp > 0){
 		}
 		mysqli_stmt_close($stmt_AppInf);
 
-		// if Application_Information completed, go to Confirmation page
+		// if Application_Information completed, go to PageLast 
 		if($countAppInf > 0){
-			goTo_Confirmation();			
+			goTo_PageLast();			
 		// else, if Application_Information not completed, go to Application_Information page			
 		} else {
 			goTo_applicationInfo();
@@ -94,10 +94,10 @@ if($countNewApp > 0){
 }
 
 
-function goTo_Confirmation(){
-	// echo "<p>Sent to Confirmation page...";
+function goTo_PageLast(){
+	// echo "<p>Sent to PageLast...";
 	echo <<<EOF
-    <form action="Confirmation.php" method="post">
+    <form action="PageLast.php" method="post">
 <p> 
 Our records show that you already have an application on file. 
 </p>
