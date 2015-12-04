@@ -4,9 +4,9 @@ session_start();
 
 $_SESSION['user_id'] = $_POST['user_id'];
 
-for testing purposes only
-print_r($_POST);
-print_r($_SESSION);
+// for testing purposes only
+// print_r($_POST);
+// print_r($_SESSION);
 
 // check if user has created an application in new_application
 $stmt_NewApp = mysqli_prepare($conn, "SELECT application_id FROM new_application WHERE user_id = ?");

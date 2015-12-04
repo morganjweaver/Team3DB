@@ -24,7 +24,6 @@
 	// check connection status
 	if($stmt_new_application==FALSE){die("Connecton failed:".mysqli_connect_error());}
 	
-	//*****NOTE***** deciding to use user_name NOT user_id (if decide to keep id, also update $sqlAppID query string below)
 	mysqli_stmt_bind_param($stmt_new_application, "sssssss",  
 		$_SESSION['user_id'],
 		$_POST['grad_type_id'], 
@@ -46,8 +45,6 @@
 	$appID = mysqli_query($conn, $sqlAppID);
 	$row = mysqli_fetch_row($appID);
 	$_SESSION['application_id'] = $row[0];
-	echo "TEST APP_ID ".$_SESSION['application_id'];
-
 ?>
 
 <!DOCTYPE html>
