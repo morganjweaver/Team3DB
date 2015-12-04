@@ -31,7 +31,7 @@
 
 <body>
 
- <form action="Page1_New_Application.php" method="POST">
+<form action="login_redirect.php" method="POST">
 
 	<p>
 		Username:
@@ -58,7 +58,7 @@
 		<button type="submit" formaction="CreateNewUserAccount.php" name="new_user">Create new account
 		</button>
 	</p>
-
+</form>
 
 </body>
 

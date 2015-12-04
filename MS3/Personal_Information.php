@@ -311,6 +311,8 @@
 	mysqli_free_result($resultMilitaryBranch);
 	mysqli_free_result($resultVetStat);
 	mysqli_free_result($resultOriginType);
+	mysqli_free_result($resultGender);
+	mysqli_free_result($resultMonth);
 	mysqli_close($conn);
 ?>
 </html>
