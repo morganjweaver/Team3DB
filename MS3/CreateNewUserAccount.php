@@ -12,14 +12,14 @@
 
 	<p>
 		Email:
-		<input name="user_id" placeholder="enter email address">		
+		<input name="user_id" placeholder="enter email address" required />		
 	</p>
 
 	<p>
 		Create Password:
-		<input type="password" name="user_password" placeholder="enter password">
+		<input type="password" name="user_password" placeholder="enter password" required />
 	</p>
 
 	<p>
-		<button type="submit" formaction="Login.php" name="create_new_user">Create New Account
+		<button type="submit" formaction="Login.php" name="create_new_user" required>Create New Account
 		</button>
