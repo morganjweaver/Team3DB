@@ -35,7 +35,7 @@ if (isset($_POST['felony'])){
 }
 
 if (isset($_POST['sanctioned'])){
-	$felony = $_POST['sanctioned'];
+	$sanctioned = $_POST['sanctioned'];
 } else {
 	echo "<p> <font color='red'>* Suspension, probation, or dismissal status not entered. 
 	</font> <p>";

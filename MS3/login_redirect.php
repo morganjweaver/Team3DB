@@ -2,6 +2,9 @@
 require "connection.php";
 session_start();
 
+// set 'user_id' SESSION variable
+$_SESSION['user_id'] = $_POST['user_id'];
+
 // check if user has created an application in new_application
 $stmt_NewApp = mysqli_prepare($conn, "SELECT application_id FROM new_application WHERE user_id = ?");
 mysqli_stmt_bind_param($stmt_NewApp, "s", $user);

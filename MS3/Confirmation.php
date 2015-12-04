@@ -328,7 +328,6 @@ mysqli_free_result($sanctioned_result);
 mysqli_free_result($ed_hist_result);
 mysqli_free_result($employment_result);
 mysqli_free_result($test_result);
-mysqli_free_result($grad_type_result);
     mysqli_close($conn);
 ?>
 </html>

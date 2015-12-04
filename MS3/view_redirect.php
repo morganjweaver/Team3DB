@@ -2,6 +2,7 @@
 require "connection.php";
 session_start();
 
+// set 'user_id' SESSION variable
 $_SESSION['user_id'] = $_POST['user_id'];
 
 // check if user has created an application in new_application

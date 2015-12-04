@@ -7,7 +7,6 @@ if(isset($_POST['redirection'])){
 	display_formAppInfo();
 // otherwise, verify Personal_Information page
 } else{
-	
 	// check for completion and set Personal_Information variables 
 	include "check_variables_Personal_Information.php";
 		

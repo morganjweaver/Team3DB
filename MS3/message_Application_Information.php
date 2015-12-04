@@ -1,10 +1,6 @@
 <?php
 require "connection.php";
 session_start();
-
-// for testing purposes only - will remove
-print_r($_POST);
-print_r($_SESSION);
 ?>
 
 <html>
@@ -30,12 +26,11 @@ if ($applicationInfoIsComplete) {
 		$other, $fel, $sanct);
 	
 	$app = $_SESSION['application_id'];
-	$fin = '$app_financial_aid';
-	$emp_tuition = '$app_employer_tuition';
-	$other = '$app_other_program_apps';
-	$fel = '$app_felony';
-	$sanct = '$app_sanctioned';
-	
+	$fin = $financial_aid;
+	$emp_tuition = $employer_tuition;
+	$other = $other_program_apps;
+	$fel = $felony;
+	$sanct = $sanctioned;	
 	
 	mysqli_stmt_execute($stmt_application_info);
 	mysqli_stmt_close($stmt_application_info);
