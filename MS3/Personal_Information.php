@@ -1,6 +1,7 @@
 <?php
+	
 	require "connection.php";
-
+	session_start();
 
 	$sqlStateQuery = "SELECT state_id, state_description FROM state";
 	$sqlMilitaryBranchQuery = "SELECT military_id, military_description FROM military_branch";
@@ -45,6 +46,7 @@
 	$appID = mysqli_query($conn, $sqlAppID);
 	$row = mysqli_fetch_row($appID);
 	$_SESSION['application_id'] = $row[0];
+	echo "TEST APP_ID ".$_SESSION['application_id'];
 
 ?>
 

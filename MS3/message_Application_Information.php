@@ -19,7 +19,7 @@ include "check_variables_Application_Information.php";
 
 if ($applicationInfoIsComplete) {
 	// include prepared statement for Application_Information here
-	if($_POST['felony'] == 1)) {
+	if($_POST['felony'] == 1) {
 		display_message();
 	} else {
 		goTo_confirmation();

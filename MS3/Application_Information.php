@@ -11,6 +11,7 @@ session_start();
 // for testing purposes only - will remove
 print_r($_POST);
 print_r($_SESSION);
+var_dump($_SESSION);
 
 // check for completion and set Personal_Information variables 
 include "check_variables_Personal_Information.php";

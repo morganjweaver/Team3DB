@@ -3,11 +3,13 @@
 
 <?php
 session_start();
-$_SESSION['user_id'] = '100';
+$_SESSION['user_id'] = '200';
+$_SESSION['application_id'] = NULL;
 
 // for testing purposes only - will remove
 print_r($_POST);
 print_r($_SESSION);
+//var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>

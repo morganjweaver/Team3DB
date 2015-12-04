@@ -1,6 +1,7 @@
 <?php 
 require "connection.php";
 // include "check_variables_Application_Information.php";
+session_start();
 ?>
 
 <!-- for testing purposes only - will remove -->
@@ -24,17 +25,15 @@ var_dump($_SESSION);
 		$other, $fel, $sanct);
 	
 	$app = $_SESSION['application_id'];
-	$fin = $app_financial_aid;
-	$emp_tuition = $app_employer_tuition;
-	$other = $app_other_program_apps;
-	$fel = $app_felony;
-	$sanct = $app_sanctioned;
+	$fin = '$app_financial_aid';
+	$emp_tuition = '$app_employer_tuition';
+	$other = '$app_other_program_apps';
+	$fel = '$app_felony';
+	$sanct = '$app_sanctioned';
 	
 	
 	mysqli_stmt_execute($stmt_application_info);
 	mysqli_stmt_close($stmt_application_info);
-
-// } else 
 
 ?>
 
@@ -47,14 +46,15 @@ var_dump($_SESSION);
 
 
 
+
+
+
+
+    <form action="Logout.php" method="post">
+
 <?php
 
 $current_app_id = $_SESSION['application_id'];
-
-function display_confirmation() {
-    echo <<<EOF
-    <form action="Logout.php" method="post">
-
 
 //New_Application table vars start here-----------------
 $grad_type = "SELECT grad_type_description FROM new_application, graduate_type 
@@ -180,7 +180,7 @@ applicant_test.test_year FROM entrance_test, applicant_test WHERE
 entrance_test.test_ID = applicant_test.test_ID AND 
 applicant_test.application_ID = $current_app_id";
 $test_result = mysqli_query($conn, $test);
-
+?>
 
     //Print variables below:
 
@@ -305,9 +305,6 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 	?>
 
 <p style='margin-left:20px;'>
-EOF;
-}
-?>
 
 <p>
 		<input type="submit" value="Log Out">
