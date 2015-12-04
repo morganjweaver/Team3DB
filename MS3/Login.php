@@ -4,7 +4,7 @@
 	//prepared statement to insert new_user into DB
 		$stmt_new_user = mysqli_prepare($conn,"INSERT INTO user
 			(user_id,user_password) 
-			VALUES (?,?)");
+			VALUES (?,md5(?))");
 		
 		// check connection status
 		if($stmt_new_user==FALSE){die("Connecton failed:".mysqli_connect_error());}

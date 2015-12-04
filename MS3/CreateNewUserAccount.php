@@ -21,5 +21,5 @@
 	</p>
 
 	<p>
-		<button type="submit" formaction="Login.php" name="create_new_user">Create New Account
+		<button type="submit" formaction="Login.php" name="create_new_user" required>Create New Account
 		</button>
