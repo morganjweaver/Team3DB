@@ -4,6 +4,7 @@ session_start();
 
 $_SESSION['user_id'] = $_POST['user_id'];
 
+
 // for testing purposes only
 // print_r($_POST);
 // print_r($_SESSION);
@@ -15,22 +16,12 @@ $user = $_POST['user_id'];
 mysqli_stmt_execute($stmt_NewApp);
 mysqli_stmt_bind_result($stmt_NewApp, $application);
 
-// works within count statement
-//mysqli_stmt_fetch($stmt_NewApp);
-
-
 $countNewApp = 0;
 while(mysqli_stmt_fetch($stmt_NewApp)){
 	$countNewApp++;
 }
 
-// testing
-//echo "<p>Application id is ".$application;
-
 mysqli_stmt_close($stmt_NewApp);
-
-// testing
-//echo "<p>Count for New_Application is ".$countNewApp;
 
 // if the user has created an application, find the state of completion
 if($countNewApp > 0){
@@ -44,23 +35,12 @@ if($countNewApp > 0){
 	mysqli_stmt_execute($stmt_PerInf);
 	mysqli_stmt_bind_result($stmt_PerInf, $result_perInf);
 	
-	//testing
-	//echo "<p>Application id is ".$app;
-	
-	
 	$countPerInf = 0;
 	while(mysqli_stmt_fetch($stmt_PerInf)){
 		$countPerInf++;
-	}
-	
-	// testing
-	//echo "<p>Count for Personal_Informaiton is".$countPerInf;
-	
+	}	
 	mysqli_stmt_close($stmt_PerInf);
 
-	// testing
-	//echo "<p>Count for Personal_Informaiton is ".$countPerInf;
-	
 	// if Personal_Informaiton page completed, check next page
 	if($countPerInf > 0){
 		// check to see if Application_Information was completed
@@ -77,14 +57,14 @@ if($countNewApp > 0){
 		}
 		mysqli_stmt_close($stmt_AppInf);
 
-		// if Application_Information completed, go to PageLast 
+		// if Application_Information completed, go to Confirmation page
 		if($countAppInf > 0){
-			goTo_PageLast();			
+			goTo_Confirmation();			
 		// else, if Application_Information not completed, go to Application_Information page			
 		} else {
 			goTo_applicationInfo();
 		}	
-	// else, if Personal_Informaiton not completed, go to the Personal_Informaiton page	
+	// else, if Personal_Informaiton not completed, go to Personal_Informaiton page	
 	} else {
 	goTo_personalInfo();
 	}
@@ -94,10 +74,9 @@ if($countNewApp > 0){
 }
 
 
-function goTo_PageLast(){
-	// echo "<p>Sent to PageLast...";
+function goTo_Confirmation(){
 	echo <<<EOF
-    <form action="PageLast.php" method="post">
+    <form action="Confirmation.php" method="post">
 <p> 
 Our records show that you already have an application on file. 
 </p>
@@ -109,7 +88,6 @@ EOF;
 }
 
 function goTo_applicationInfo(){
-	// echo "<p>Sent to Application_Information page...";
 	echo <<<EOF
     <form action="Application_Information.php" method="post">
 <p>
@@ -123,7 +101,6 @@ EOF;
 }
 
 function goTo_personalInfo(){
-	// echo "<p>Sent to Personal_Information page...";
 	echo <<<EOF
     <form action="Personal_Information.php" method="post">
 <p>
@@ -137,14 +114,10 @@ EOF;
 }
 
 function goTo_newApplication(){
-	//echo "<p>Sent to New_Application page...";
 	header("Location: New_Application.php");
     exit();
 }
 
-
 mysqli_close($conn);
-session_unset();
-session_destroy();
 
 ?>

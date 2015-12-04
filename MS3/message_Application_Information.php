@@ -30,7 +30,7 @@ if ($applicationInfoIsComplete) {
 
 function display_message(){
     echo <<<EOF
-    <form action="PageLast.php" method="post">
+    <form action="Confirmation.php" method="post">
 <p>
 A conviction will not necessarily bar admission but will require additional <br>
 documentation prior to a decision. You will be contacted shortly via email with <br>
@@ -45,7 +45,7 @@ EOF;
 
 function goTo_Confirmation(){
 	    echo <<<EOF
-    <form action="PageLast.php" method="post">
+    <form action="Confirmation.php" method="post">
 <p>
 Your application is complete. Click "Continue" to review your submission.
 </p>
