@@ -1,81 +1,76 @@
 <?php
 require "connection.php";
-
-//echo mysqli_connect_error();
-
 session_start();
 
-// temporary for texting
-//$_SESSION['application_id'] = 1000004;
-
-// for testing purposes only - will remove
-print_r($_POST);
-print_r($_SESSION);
-var_dump($_SESSION);
-
-// check for completion and set Personal_Information variables 
-include "check_variables_Personal_Information.php";
-	
-// If all information on Personal_Information page is complete, add it to the 
-// DB and display the Application_Information page. Otherwise, send the user 
-// back to the Personal_Information page.
-if ($personalInfoIsComplete){
-	
-	// prepared statement to insert personal_information into DB
-	$stmt_personal_info = mysqli_prepare($conn, "INSERT INTO personal_information
-	(application_id, student_fname, student_lname, student_initial, student_prefname, 
-	student_dob, student_street_address, student_unit_num, student_city, student_zip, 
-	state_id, student_prefphone, student_citizen, student_english_lang, gender_id, 
-	vet_status_id, military_id, hisplat)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-	
-	// check connection status
-	if($stmt_personal_info==FALSE){die("Connecton failed:".mysqli_connect_error());}
-	
-	mysqli_stmt_bind_param($stmt_personal_info, 'isssssssssssiisssi', $app, $fname, 
-	$lname, $initial, $prefname, $dob, $street_address, $unit_num, $city, $zip, $state,	
-	$prefphone, $citizen, $english_lang, $gender, $vet_status, $military, $hisp);
-	
-	$app = $_SESSION['application_id'];
-	$fname = $student_fname;
-	$lname = $student_lname;
-	$initial = $student_initial;
-	$prefname = $student_prefname;
-	$dob = $student_dob;
-	$street_address = $student_street_address;
-	$unit_num = $student_unit_num;
-	$city = $student_city;
-	$zip = $student_zip;
-	$state = $state_id;
-	$prefphone = $student_prefphone;
-	$citizen = $student_citizen;
-	$english_lang = $student_english_lang;
-	$gender = $gender_id;
-	$vet_status = $vet_status_id;
-	$military = $military_id;
-	$hisp = $hisplat;	
-	
-	mysqli_stmt_execute($stmt_personal_info);
-	mysqli_stmt_close($stmt_personal_info);
-	
-	// prepared statement to insert applicant_origin into the DB
-	$stmt_origin = mysqli_prepare($conn, "INSERT INTO applicant_origin 
-	VALUES(?,?)");
-	mysqli_stmt_bind_param($stmt_origin, 'is', $app, 
-	$orig);
-	$app = $_SESSION['application_id'];
-	foreach($origin_id as $origin){
-		$orig = $origin;
-		//echo "<br>Testing the values used for execute: ".$orig." and ".$app;
-		mysqli_stmt_execute($stmt_origin);
-	}
-	mysqli_stmt_close($stmt_origin);
-	
-	// displays the Application_Information form page
+// if user is sent here by redirection, display Application_Information form
+if(isset($_POST['redirection'])){
 	display_formAppInfo();
-	
-} else {
-	// returns user to the Personal_Information page to complete form
-	goTo_personalInformation();
+// otherwise, verify Personal_Information page
+} else{
+	// check for completion and set Personal_Information variables 
+	include "check_variables_Personal_Information.php";
+		
+	// If all information on Personal_Information page is complete, add it to the 
+	// DB and display the Application_Information page. Otherwise, send the user 
+	// back to the Personal_Information page.
+	if ($personalInfoIsComplete){
+		
+		// prepared statement to insert personal_information into DB
+		$stmt_personal_info = mysqli_prepare($conn, "INSERT INTO personal_information
+		(application_id, student_fname, student_lname, student_initial, student_prefname, 
+		student_dob, student_street_address, student_unit_num, student_city, student_zip, 
+		state_id, student_prefphone, student_citizen, student_english_lang, gender_id, 
+		vet_status_id, military_id, hisplat)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		
+		// check connection status
+		if($stmt_personal_info==FALSE){die("Connecton failed:".mysqli_connect_error());}
+		
+		mysqli_stmt_bind_param($stmt_personal_info, 'isssssssssssiisssi', $app, $fname, 
+		$lname, $initial, $prefname, $dob, $street_address, $unit_num, $city, $zip, $state,	
+		$prefphone, $citizen, $english_lang, $gender, $vet_status, $military, $hisp);
+		
+		$app = $_SESSION['application_id'];
+		$fname = $student_fname;
+		$lname = $student_lname;
+		$initial = $student_initial;
+		$prefname = $student_prefname;
+		$dob = $student_dob;
+		$street_address = $student_street_address;
+		$unit_num = $student_unit_num;
+		$city = $student_city;
+		$zip = $student_zip;
+		$state = $state_id;
+		$prefphone = $student_prefphone;
+		$citizen = $student_citizen;
+		$english_lang = $student_english_lang;
+		$gender = $gender_id;
+		$vet_status = $vet_status_id;
+		$military = $military_id;
+		$hisp = $hisplat;	
+		
+		mysqli_stmt_execute($stmt_personal_info);
+		mysqli_stmt_close($stmt_personal_info);
+		
+		// prepared statement to insert applicant_origin into the DB
+		$stmt_origin = mysqli_prepare($conn, "INSERT INTO applicant_origin 
+		VALUES(?,?)");
+		mysqli_stmt_bind_param($stmt_origin, 'is', $app, 
+		$orig);
+		$app = $_SESSION['application_id'];
+		foreach($origin_id as $origin){
+			$orig = $origin;
+			//echo "<br>Testing the values used for execute: ".$orig." and ".$app;
+			mysqli_stmt_execute($stmt_origin);
+		}
+		mysqli_stmt_close($stmt_origin);
+		
+		// displays the Application_Information form page
+		display_formAppInfo();
+		
+	} else {
+		// returns user to the Personal_Information page to complete form
+		goTo_personalInformation();
+	}
 }
 
 

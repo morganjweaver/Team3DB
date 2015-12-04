@@ -16,28 +16,32 @@
 	$resultGender = mysqli_query($conn, $sqlGender);
 	$resultMonth = mysqli_query($conn, $sqlMonth);
 
-	//prepared statment to insert new_application into DB
-	$stmt_new_application = mysqli_prepare($conn,"INSERT INTO new_application
-		(user_id,grad_type_id,college_id,degree_id,desired_major_id,term_season_id,term_year_id) 
-		VALUES (?,?,?,?,?,?,?)");
-	
-	// check connection status
-	if($stmt_new_application==FALSE){die("Connecton failed:".mysqli_connect_error());}
-	
-	mysqli_stmt_bind_param($stmt_new_application, "sssssss",  
-		$_SESSION['user_id'],
-		$_POST['grad_type_id'], 
-		$_POST['college_id'], 
-		$_POST['degree_id'], 
-		$_POST['desired_major_id'],
-		$_POST['term_season_id'], 
-		$_POST['term_year_id'] 
-		); 
+	// if this is user's first visit to Personal_Information, run prepared statement
+	//(if redirection is set - prepared statement was completed prior)
+	if(!isset($_POST['redirection'])){
+		//prepared statment to insert new_application into DB
+		$stmt_new_application = mysqli_prepare($conn,"INSERT INTO new_application
+			(user_id,grad_type_id,college_id,degree_id,desired_major_id,term_season_id,term_year_id) 
+			VALUES (?,?,?,?,?,?,?)");
+		
+		// check connection status
+		if($stmt_new_application==FALSE){die("Connecton failed:".mysqli_connect_error());}
+		
+		mysqli_stmt_bind_param($stmt_new_application, "sssssss",  
+			$_SESSION['user_id'],
+			$_POST['grad_type_id'], 
+			$_POST['college_id'], 
+			$_POST['degree_id'], 
+			$_POST['desired_major_id'],
+			$_POST['term_season_id'], 
+			$_POST['term_year_id'] 
+			); 
 
-	//execute prepared statement
-	mysqli_stmt_execute($stmt_new_application);
-	//close statement and connection
-	mysqli_stmt_close($stmt_new_application);
+		//execute prepared statement
+		mysqli_stmt_execute($stmt_new_application);
+		//close statement and connection
+		mysqli_stmt_close($stmt_new_application);
+	}
 
 	$sessionUserID = $_SESSION['user_id'];
 	//adding application_id to $_SESSION
