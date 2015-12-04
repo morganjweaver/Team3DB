@@ -21,8 +21,12 @@ mysqli_stmt_close($stmt_NewApp);
 
 // if the user has created an application, find the state of completion
 if($countNewApp > 0){
-	// get the applcation_id
-	$_SESSION['application_id'] = $application;
+	// set the applcation_id as a SESSION variable
+	$sqlAppID = "SELECT application_id FROM new_application WHERE user_id ='$user'";
+	$appID = mysqli_query($conn, $sqlAppID);
+	$row = mysqli_fetch_row($appID);	
+	$_SESSION['application_id'] = $row[0];
+	
 	// check to see if Personal_Information was completed
 	$stmt_PerInf = mysqli_prepare($conn, "SELECT student_fname FROM 
 	personal_information WHERE application_id = ?");
@@ -86,6 +90,7 @@ Our records show that your application is incomplete.
 Please click "Continue" to return to the Application Information page to complete your application.<br>
 Once your application is complete, you will be able to review your submission.
 </p>
+<input type="hidden" name="redirection" value="redirected">
 <p><input type="submit" value="Continue"></p>
 EOF;
 }
@@ -100,6 +105,7 @@ Our records show that your application is incomplete.
 Please click "Continue" to return to the Personal Information page to complete your application.<br>
 Once your application is complete, you will be able to review your submission.
 </p>
+<input type="hidden" name="redirection" value="redirected">
 <p><input type="submit" value="Continue"></p>
 EOF;
 }

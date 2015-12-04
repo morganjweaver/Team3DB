@@ -4,8 +4,8 @@ session_start();
 ?>
 
 <?php
-//prepared statements for app_info table
-	$stmt_application_info = mysqli_prepare($conn, "INSERT INTO application_information
+//prepared statements for app_info table included in message_Application_Information.php
+/* 	$stmt_application_info = mysqli_prepare($conn, "INSERT INTO application_information
 	(application_id, app_financial_aid,app_employer_tuition,app_other_program_apps,
 		app_felony, app_sanctioned) VALUES(?,?,?,?,?,?)");
 	
@@ -24,7 +24,7 @@ session_start();
 	
 	
 	mysqli_stmt_execute($stmt_application_info);
-	mysqli_stmt_close($stmt_application_info);
+	mysqli_stmt_close($stmt_application_info); */
 
 ?>
 
@@ -89,6 +89,10 @@ $dob_result = mysqli_query($conn, $dob);
 $address = "SELECT student_street_address, student_unit_num, student_city, state_id, student_zip FROM personal_information
 WHERE personal_information.application_ID = $current_app_id";
 $address_result = mysqli_query($conn, $address);
+
+$phone = "SELECT  student_prefphone from personal_information 
+WHERE personal_information.application_ID = $current_app_id";
+$phone_result = mysqli_query($conn, $phone);
 
 $citizen = "SELECT student_citizen FROM personal_information
 WHERE personal_information.application_ID = $current_app_id";
@@ -211,8 +215,8 @@ $test_result = mysqli_query($conn, $test);
 $row[2].", ",$row[3]." ",$row[4]; } } ?>
 
 <p style='margin-left:20px;'> Phone Number: 
-<?php if (mysqli_num_rows($dob_result) > 0) 
-{ while($row = mysqli_fetch_row($dob_result)) { echo $row[0]; } } ?>
+<?php if (mysqli_num_rows($phone_result) > 0) 
+{ while($row = mysqli_fetch_row($phone_result)) { echo $row[0]; } } ?>
 
 <p style='margin-left:20px;'> US Citizen:
 <?php if (mysqli_num_rows($citizen_result) > 0) 
@@ -308,6 +312,7 @@ mysqli_free_result($name_result);
 mysqli_free_result($preferred_name_result);
 mysqli_free_result($dob_result);
 mysqli_free_result($address_result);
+mysqli_free_result($phone_result);
 mysqli_free_result($citizen_result);
 mysqli_free_result($native_english_result);
 mysqli_free_result($gender_result);

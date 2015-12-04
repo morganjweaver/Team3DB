@@ -4,7 +4,7 @@ session_start();
 
 // for testing purposes only - will remove
 print_r($_POST);
-//print_r($_SESSION);
+print_r($_SESSION);
 ?>
 
 <html>
@@ -14,11 +14,32 @@ print_r($_POST);
 <body>    
 
 <?php
-// check for completion and set Application_Information variables
+
 include "check_variables_Application_Information.php";
 
 if ($applicationInfoIsComplete) {
-	// include prepared statement for Application_Information here
+	// prepared statement for application_information table
+	$stmt_application_info = mysqli_prepare($conn, "INSERT INTO application_information
+	(application_id, app_financial_aid,app_employer_tuition,app_other_program_apps,
+		app_felony, app_sanctioned) VALUES(?,?,?,?,?,?)");
+	
+	// check connection status
+	if($stmt_application_info==FALSE){die("Error:".mysqli_connect_error());}
+	
+	mysqli_stmt_bind_param($stmt_application_info, 'iiiiii', $app, $fin, $emp_tuition,
+		$other, $fel, $sanct);
+	
+	$app = $_SESSION['application_id'];
+	$fin = '$app_financial_aid';
+	$emp_tuition = '$app_employer_tuition';
+	$other = '$app_other_program_apps';
+	$fel = '$app_felony';
+	$sanct = '$app_sanctioned';
+	
+	
+	mysqli_stmt_execute($stmt_application_info);
+	mysqli_stmt_close($stmt_application_info);
+
 	if($_POST['felony'] == 1) {
 		display_message();
 	} else {
