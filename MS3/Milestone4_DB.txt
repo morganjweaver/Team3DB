@@ -195,7 +195,7 @@ user_password VARCHAR(32) NOT NULL
 
 CREATE TABLE new_application (
 application_id INT NOT NULL AUTO_INCREMENT,
-user_id VARCHAR(16) NOT NULL,
+user_id VARCHAR(50) NOT NULL,
 grad_type_id VARCHAR(6) NOT NULL,
 college_id VARCHAR(5) NOT NULL,
 degree_id VARCHAR(6) NOT NULL,
