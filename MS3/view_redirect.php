@@ -6,8 +6,7 @@ session_start();
 $_SESSION['user_id'] = $_POST['user_id'];
 
 // check if user has created an application in new_application
-$stmt_NewApp = mysqli_prepare($conn, "SELECT application_id FROM 
-new_application WHERE user_id = ?");
+$stmt_NewApp = mysqli_prepare($conn, "SELECT application_id FROM new_application WHERE user_id = ?");
 mysqli_stmt_bind_param($stmt_NewApp, "s", $user);
 $user = $_POST['user_id'];
 mysqli_stmt_execute($stmt_NewApp);
@@ -39,8 +38,7 @@ if($countNewApp > 0){
 	$countPerInf = 0;
 	while(mysqli_stmt_fetch($stmt_PerInf)){
 		$countPerInf++;
-	}
-
+	}	
 	mysqli_stmt_close($stmt_PerInf);
 
 	// if Personal_Informaiton page completed, check next page
@@ -126,7 +124,4 @@ EOF;
 }
 
 mysqli_close($conn);
-session_unset();
-session_destroy();
-
 ?>
