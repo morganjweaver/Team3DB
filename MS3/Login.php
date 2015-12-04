@@ -35,12 +35,12 @@
 
 	<p>
 		Username:
-		<input type="email" name="user_id" placeholder="enter email address">		
+		<input type="email" name="user_id" placeholder="enter email address" required />		
 	</p>
 
 	<p>
 		Password:
-		<input type="password" name="user_password" placeholder="enter password">
+		<input type="password" name="user_password" placeholder="enter password" required />
 	</p>
 
 	<p>
