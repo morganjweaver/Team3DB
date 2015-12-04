@@ -1,0 +1,36 @@
+This Fabulous Database & Front End Brought to You by:
+				Group 3: 
+Adrienne Grieco, Morgan Weaver, Brandi Weekes
+
+
+-------------------------------
+1. Setup
+2. Login Credentials
+3. MySQL Database Updates
+-------------------------------
+
+1. SETUP:
+-Unzip the file and place the entire MS3 folder in your AMPPS www folder.
+-Run the SQL script Milestone4_DB.txt to create the database, tables, etc.
+-The connection.php file should have login credentials, but if not, use
+the login credentials below.
+-Start on Login.php
+-Assume every field is required except: 
+	Personal Information:
+		Middle Initial
+		Preferred Name
+		Unit Number
+		Military Branch (this is auto populated, but the code sets to NULL
+	    unless veteran status is checked)
+
+		**Database script written with assumption user creates username +
+		  password and then uses them to log in and create a new application.
+	
+2.LOGIN CREDENTIALS:
+To be used with connection.php
+
+
+3. CHANGELOG FOR DATABASE SCRIPT:
+-Added user table to hold user/password credentials
+-Divided main Application table into 3 tables, one for each page,
+consisting of New_Application, Personal_Information, and Application_Information. 
