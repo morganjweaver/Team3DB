@@ -4,12 +4,6 @@
 <?php
 session_start();
 $_SESSION['user_id'] = '200';
-$_SESSION['application_id'] = NULL;
-
-// for testing purposes only - will remove
-print_r($_POST);
-print_r($_SESSION);
-//var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +33,9 @@ $yearresult = mysqli_query($conn, $yearsql);
 <p>Please answer the following:</p>
 
 <form action= "Personal_Information.php" method= "POST">
-<!--<ol>-->
+
 <p style='margin-left:20px;'> What type of student are you?
-
 <?php 
-
 if (mysqli_num_rows($studenttypessqlresult) > 0) {
     echo "<select name='grad_type_id'>";
     while($row = mysqli_fetch_row($studenttypessqlresult)) {
@@ -51,10 +43,9 @@ if (mysqli_num_rows($studenttypessqlresult) > 0) {
     }
     echo "</select>";
 } else {
-    echo "0 results";
-}
-
+    echo "0 results"; }
 ?>
+
 </select>
 <br />
 <p style='margin-left:20px;'> To which college are you applying?
@@ -71,6 +62,7 @@ if (mysqli_num_rows($collegetypessqlresult) > 0) {
     echo "0 results";
 }
 ?>
+
 </select><br />
 <p style='margin-left:20px;'>What type of degree are you applying for?
 <?php 
@@ -115,6 +107,7 @@ if (mysqli_num_rows($seasonresult) > 0) {
     echo "0 results";
 }
 ?>
+
 <br />
 <p style='margin-left:20px;'>Which year are you applying for?
 <?php 

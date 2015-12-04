@@ -1,19 +1,10 @@
 <?php 
 require "connection.php";
-// include "check_variables_Application_Information.php";
 session_start();
 ?>
 
-<!-- for testing purposes only - will remove -->
-<?php print_r($_POST); 
-var_dump($_POST);
-var_dump($_SESSION);
-?>
-
-<!--Prepared statements for Application_Information go here.  Page inserts App_Info into DB after checking for NULLs, then echoes confirmation page.-->
 <?php
-// if ($applicationInfoIsComplete)
-// {
+//prepared statements for app_info table
 	$stmt_application_info = mysqli_prepare($conn, "INSERT INTO application_information
 	(application_id, app_financial_aid,app_employer_tuition,app_other_program_apps,
 		app_felony, app_sanctioned) VALUES(?,?,?,?,?,?)");
@@ -43,12 +34,6 @@ var_dump($_SESSION);
 	<title>Confirmation</title>
 </head>
 <body>
-
-
-
-
-
-
 
     <form action="Logout.php" method="post">
 
@@ -182,7 +167,7 @@ applicant_test.application_ID = $current_app_id";
 $test_result = mysqli_query($conn, $test);
 ?>
 
-    //Print variables below:
+    <!-- Print variables below: -->
 
   
 <p style='margin-left:20px;'> Student Type: 
@@ -308,11 +293,37 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 
 <p>
 		<input type="submit" value="Log Out">
-		<!-- <form action="logout.php">
-    <input type="button" value="Logout">
-</form> -->
-	</p>
+</p>
 
 </form>
 </body>
+<?php
+mysqli_free_result($grad_type_result);
+mysqli_free_result($college_result);
+mysqli_free_result($degree_type_result);
+mysqli_free_result($major_result);
+mysqli_free_result($term_season_result);
+mysqli_free_result($term_year_result);
+mysqli_free_result($name_result);
+mysqli_free_result($preferred_name_result);
+mysqli_free_result($dob_result);
+mysqli_free_result($address_result);
+mysqli_free_result($citizen_result);
+mysqli_free_result($native_english_result);
+mysqli_free_result($gender_result);
+mysqli_free_result($veteran_status_result);
+mysqli_free_result($branch_result);
+mysqli_free_result($hispanic_result);
+mysqli_free_result($ethnicity_result);
+mysqli_free_result($finaid_result);
+mysqli_free_result($emp_asst_result);
+mysqli_free_result($other_progs_result);
+mysqli_free_result($felony_result);
+mysqli_free_result($sanctioned_result);
+mysqli_free_result($ed_hist_result);
+mysqli_free_result($employment_result);
+mysqli_free_result($test_result);
+mysqli_free_result($grad_type_result);
+    mysqli_close($conn);
+?>
 </html>
